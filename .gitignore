@@ -6,3 +6,5 @@ __pycache__/
 # our own stuff
 *.png
 *.csv
+*.yaml
+*.pth
