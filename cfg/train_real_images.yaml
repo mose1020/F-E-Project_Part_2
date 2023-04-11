@@ -39,7 +39,7 @@ std: 0.26 # brauchen wir std: 0.26
 # noise: [8, 40]
 # bg: 1
 
-gpu: False
-dir_base: 'result/trained_model_on_cpu' # Ordner, in welchem die results gespeichert werden
-dir_dataset: 'dataset/dataset_no_rotation' # Ordner in welchem die traingsbilder und testbilder liegen
+gpu: True
+dir_base: 'result/mini_testdatensatz_cleared' # Ordner, in welchem die results gespeichert werden
+dir_dataset: 'dataset/mini_testdatensatz_cleared' # Ordner in welchem die traingsbilder und testbilder liegen
 
