@@ -9,6 +9,7 @@ __pycache__/
 *.csv
 *.yaml
 *.pth
+*.zip
 
 *.ipynb_output/
 *.ipynb_checkpoints
