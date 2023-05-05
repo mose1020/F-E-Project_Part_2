@@ -45,48 +45,77 @@ class DataServoStereo(_data.Dataset):
     def data_transform(self, index):
 
         # loads only one image at a time
-        img,plug_mask_tensor,plug_mask = img_processing(path.join(self.data_path,self.ims[index]),
-                             self.im_size,mean=self.mean,std=self.std,grey=self.grey)
+        img,plug_mask_tensor,plug_mask = self.img_processing(path.join(self.data_path,self.ims[index]))
         
         #print(self.ims[index])
         return img,plug_mask_tensor,plug_mask
         
 
-def img_processing(data_path, im_size, mean, std, grey):
+    def img_processing(self,data_path):
+        
+        img = Image.open(data_path)
+        img = self.img_patch(img)
+
+        mask_path = data_path.replace('train', 'segmentation_images')
+        mask_tensor, mask = self.img_segmention2(mask_path)
+        
+        
+        #outS_tensor,outS = img_segmention(img)
+        #mask_tensor,mask,_ = self.img_segmention(img)
+
+
+        # If the parameter "grey" is true, convert the image to grayscale
+        if self.grey:
+            img = img.convert('L')
+
+        # Convert the image to a numpy array of type "uint8
+        img = np.array(img, np.uint8)
+
+        # Convert the image into a tensor, normalize it with mean and standard deviation
+        img = F.to_tensor(img)
+        img = F.normalize(img, [self.mean], [self.std])
+
+        return img,mask_tensor,mask
+
+
+    def img_segmention2(self,mask_path):
+
+        mask = Image.open(mask_path).convert('1') # normaly '1' instead of 'L'
+        mask = self.img_patch(mask) # problem with the color --> we only need one channel 
+        mask = np.array(mask)
+        mask_tensor = torch.from_numpy(mask.astype(np.int))
+
+        return mask_tensor, mask
     
-    img = Image.open(data_path)
-    img = img_patch(img, im_size)
-
-    mask_path = data_path.replace('train', 'segmentation_images')
-    mask_tensor, mask = img_segmention2(mask_path, im_size)
     
-    
-    #outS_tensor,outS = img_segmention(img)
-    #plug_mask_tensor, plug_mask,_ = img_segmention(img)
+    def img_patch(self,img):
+        # Calculate the aspect ratio of the image
+        img_ratio = img.width / img.height
 
+        # If the image is wider than it is high
+        if img_ratio > 1:
+            # Scale the width to the desired size and calculate the height while maintaining the aspect ratio
+            new_width = self.im_size[0]
+            new_height = int(new_width / img_ratio)
+        # If the image is taller than it is wide
+        else:
+            # Scale the height to the desired size and calculate the width while maintaining the aspect ratio
+            new_height = self.im_size[1]
+            new_width = int(new_height * img_ratio)
 
-    # If the parameter "grey" is true, convert the image to grayscale
-    if grey:
-        img = img.convert('L')
+        # Resize the image to the calculated size while maintaining the aspect ratio
+        img = img.resize((new_width, new_height), resample=Image.BICUBIC)
 
-    # Convert the image to a numpy array of type "uint8
-    img = np.array(img, np.uint8)
+        # Add black borders to the left and right or top and bottom of the image to make it the desired size
+        delta_w = self.im_size[0] - new_width
+        delta_h = self.im_size[1] - new_height
+        pad_width = delta_w // 2
+        pad_height = delta_h // 2
+        padding = (pad_width, pad_height, delta_w - pad_width, delta_h - pad_height)
+        img = ImageOps.expand(img, border=padding, fill=(255,255,255))
 
-    # Convert the image into a tensor, normalize it with mean and standard deviation
-    img = F.to_tensor(img)
-    img = F.normalize(img, [mean], [std])
-
-    return img,mask_tensor,mask
-
-
-def img_segmention2(mask_path, im_size):
-
-    mask = Image.open(mask_path).convert('1')
-    mask = img_patch(mask, im_size)
-    mask = np.array(mask)
-    mask_tensor = torch.from_numpy(mask.astype(np.int))
-
-    return mask_tensor, mask
+        # Return the scaled and centered image
+        return img
     
 
 
@@ -206,7 +235,7 @@ def img_segmention(img):
 
 
 
-def img_patch(img, imsize):
+def img_patch_(img, imsize):
     # Calculate the aspect ratio of the image
     img_ratio = img.width / img.height
 
