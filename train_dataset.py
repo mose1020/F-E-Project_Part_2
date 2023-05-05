@@ -39,6 +39,8 @@ class DataServoStereo(_data.Dataset):
     
     def __len__(self):
         return len(self.ims)
+    
+
 
     def data_transform(self, index):
 
@@ -54,9 +56,13 @@ def img_processing(data_path, im_size, mean, std, grey):
     
     img = Image.open(data_path)
     img = img_patch(img, im_size)
+
+    mask_path = data_path.replace('train', 'segmentation_images')
+    mask_tensor, mask = img_segmention2(mask_path, im_size)
+    
     
     #outS_tensor,outS = img_segmention(img)
-    plug_mask_tensor, plug_mask,_ = img_segmention(img)
+    #plug_mask_tensor, plug_mask,_ = img_segmention(img)
 
 
     # If the parameter "grey" is true, convert the image to grayscale
@@ -70,7 +76,18 @@ def img_processing(data_path, im_size, mean, std, grey):
     img = F.to_tensor(img)
     img = F.normalize(img, [mean], [std])
 
-    return img,plug_mask_tensor,plug_mask
+    return img,mask_tensor,mask
+
+
+def img_segmention2(mask_path, im_size):
+
+    mask = Image.open(mask_path).convert('1')
+    mask = img_patch(mask, im_size)
+    mask = np.array(mask)
+    mask_tensor = torch.from_numpy(mask.astype(np.int))
+
+    return mask_tensor, mask
+    
 
 
 
@@ -176,7 +193,6 @@ def img_segmention(img):
 
 
     #outS = plug_mask
-
 
     plug_mask_tensor = torch.from_numpy(plug_mask.astype(np.int))
 
