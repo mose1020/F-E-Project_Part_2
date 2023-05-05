@@ -53,14 +53,9 @@ class DataServoStereo(_data.Dataset):
         
         img = Image.open(data_path)
         img = self.img_patch(img)
-
-        mask_path = data_path.replace('train', 'segmentation_images')
-        mask_tensor, mask = self.img_segmention2(mask_path)
-
         # If the parameter "grey" is true, convert the image to grayscale
         if self.grey:
             img = img.convert('L')
-
         # Convert the image to a numpy array of type "uint8
         img = np.array(img, np.uint8)
 
@@ -68,7 +63,15 @@ class DataServoStereo(_data.Dataset):
         img = F.to_tensor(img)
         img = F.normalize(img, [self.mean], [self.std])
 
-        return img,mask_tensor,mask
+        if self.train:
+
+            mask_path = data_path.replace('train', 'segmentation_images')
+            mask_tensor, mask = self.img_segmention2(mask_path)
+
+        if self.train:
+            return img,mask_tensor,mask
+        else:
+            return img
 
 
     def img_segmention2(self,mask_path):
