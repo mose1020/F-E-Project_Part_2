@@ -43,10 +43,17 @@ class DataServoStereo(_data.Dataset):
 
     def data_transform(self, index):
 
+        if self.train:
         # loads only one image at a time
-        img,plug_mask_tensor,plug_mask = self.img_processing(path.join(self.data_path,self.ims[index]))
+            img,plug_mask_tensor,plug_mask = self.img_processing(path.join(self.data_path,self.ims[index]))
+        else:
+            img = self.img_processing(path.join(self.data_path,self.ims[index]))
+
+        if self.train:
+            return img,plug_mask_tensor,plug_mask
+        else:
+            return img
         
-        return img,plug_mask_tensor,plug_mask
         
 
     def img_processing(self,data_path):
