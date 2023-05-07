@@ -15,8 +15,8 @@ lr_anne: 'repeat' # brauchen wir
 batch_size: 2 #16 # brauchen wir
 ep_train: 24 #24 # brauchen wir
 #bootstrap: 0.3
-concentrate: -60 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
-inside: 150 # 50,250
+concentrate: -80 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
+inside: 8000 # 50,250
 sigma_kp: [1.0, 2.5] # brauchen wir sigma_kp: [1.0, 2.5]
 #a_dist: -200
 
