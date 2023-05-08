@@ -1,5 +1,5 @@
 task: 'full' # brauchen wird
-im_size: [[720,720], [360, 360]] # brauchen wir
+im_size: [[192,192], [96, 96]] # brauchen wir
 num_input: 1 # brauchen wir # normal: 1 --> gibt an, wie viele Bildkanäle geladen werden --> 1: Graubild, 3: RGB-Bild
 #num_output: [1, 3] 
 num_keypoint: 32 # brauchen wir normal 10
@@ -12,11 +12,11 @@ lr: 0.001 # brauchen wir # 0.001
 wd: [0.00005] # 0.00005 # Reguliert Gewichte reduziert Overfitting verändert VerlsustfunktionJed größer desteo stärker der Einfluss
 lr_anne: 'repeat' # brauchen wir
 
-batch_size: 2 #16 # brauchen wir
+batch_size: 16 #16 # brauchen wir
 ep_train: 24 #24 # brauchen wir
 #bootstrap: 0.3
-concentrate: -80 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
-inside: 80 # 50,250
+concentrate: -60 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
+inside: 50 # 50,250
 sigma_kp: [1.0, 2.5] # brauchen wir sigma_kp: [1.0, 2.5]
 #a_dist: -200
 
@@ -39,7 +39,7 @@ std: 0.26 # brauchen wir std: 0.26
 # noise: [8, 40]
 # bg: 1
 
-gpu: False
-dir_base: 'result/mini_testdatensatz_cleared' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
-dir_dataset: 'dataset/mini_testdatensatz_cleared' # Ordner in welchem die traingsbilder und testbilder liegen
+gpu: True
+dir_base: 'result/dataset_2_2023_05_04' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
+dir_dataset: 'dataset/dataset_2_2023_05_04' # Ordner in welchem die traingsbilder und testbilder liegen
 
