@@ -8,7 +8,7 @@ blk_cfg_enc: [[2, 3, 4], [4, 3, 2]] # brauchen wir
 #blk_cfg_dec: [4, 3]
 #blk_cfg_cvt: [4, 4, 4]
 drop_rate: 0.2 # brauchen wir default=0, 0.2 bedeutet, dass jedes Neuron mit einer Warscheinlichkeit von 20% augeschalten wird. Bei 1 wären alle ausgeschalten
-lr: 0.001 # brauchen wir # 0.001
+lr: 0.0001 # brauchen wir # 0.001
 wd: [0.00005] # 0.00005 # Reguliert Gewichte reduziert Overfitting verändert VerlsustfunktionJed größer desteo stärker der Einfluss
 lr_anne: 'repeat' # brauchen wir
 
@@ -16,7 +16,7 @@ batch_size: 16 #16 # brauchen wir
 ep_train: 24 #24 # brauchen wir
 #bootstrap: 0.3
 concentrate: -60 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
-inside: 50 # 50,250
+inside: 250 # 50,250
 sigma_kp: [1.0, 2.5] # brauchen wir sigma_kp: [1.0, 2.5]
 #a_dist: -200
 
