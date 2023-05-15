@@ -40,6 +40,6 @@ std: 0.26 # brauchen wir std: 0.26
 # bg: 1
 
 gpu: True
-dir_base: 'result/dataset_2_2023_05_04' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
-dir_dataset: 'dataset/dataset_2_2023_05_04' # Ordner in welchem die traingsbilder und testbilder liegen
+dir_base: 'result/dataset_large_2023_5_9' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
+dir_dataset: 'dataset/dataset_large_2023_5_9' # Ordner in welchem die traingsbilder und testbilder liegen
 
