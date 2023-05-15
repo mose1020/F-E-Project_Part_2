@@ -8,7 +8,7 @@ blk_cfg_enc: [[2, 3, 4], [4, 3, 2]] # brauchen wir
 #blk_cfg_dec: [4, 3]
 #blk_cfg_cvt: [4, 4, 4]
 drop_rate: 0.2 # brauchen wir default=0, 0.2 bedeutet, dass jedes Neuron mit einer Warscheinlichkeit von 20% augeschalten wird. Bei 1 wären alle ausgeschalten
-lr: 0.0001 # brauchen wir # 0.001
+lr: 0.0002 # brauchen wir # 0.001
 wd: [0.00005] # 0.00005 # Reguliert Gewichte reduziert Overfitting verändert VerlsustfunktionJed größer desteo stärker der Einfluss
 lr_anne: 'repeat' # brauchen wir
 
@@ -40,6 +40,6 @@ std: 0.26 # brauchen wir std: 0.26
 # bg: 1
 
 gpu: True
-dir_base: 'result/dataset_large_2023_5_9' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
-dir_dataset: 'dataset/dataset_large_2023_5_9' # Ordner in welchem die traingsbilder und testbilder liegen
+dir_base: 'result/dataset_large_2023_5_9_cleared' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
+dir_dataset: 'dataset/dataset_large_2023_5_9_cleared' # Ordner in welchem die traingsbilder und testbilder liegen
 
