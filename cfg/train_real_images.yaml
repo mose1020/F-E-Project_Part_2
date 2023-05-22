@@ -2,21 +2,21 @@ task: 'full' # brauchen wird
 im_size: [[384,384], [192, 192]] # brauchen wir
 num_input: 1 # brauchen wir # normal: 1 --> gibt an, wie viele Bildkanäle geladen werden --> 1: Graubild, 3: RGB-Bild
 #num_output: [1, 3] 
-num_keypoint: 32 # brauchen wir normal 10
-growth_rate: [96, 96, 256] # brauchen wir # [24, 24, 64]
+num_keypoint: 64 # brauchen wir normal 10
+growth_rate: [24, 24, 64] # brauchen wir # [24, 24, 64]
 blk_cfg_enc: [[2, 3, 4], [4, 3, 2]] # brauchen wir # [[2, 3, 4], [4, 3, 2]]
 #blk_cfg_dec: [4, 3]
 #blk_cfg_cvt: [4, 4, 4]
-drop_rate: 0.1 # brauchen wir default=0, 0.2 bedeutet, dass jedes Neuron mit einer Warscheinlichkeit von 20% augeschalten wird. Bei 1 wären alle ausgeschalten
+drop_rate: 0.05 # brauchen wir default=0, 0.2 bedeutet, dass jedes Neuron mit einer Warscheinlichkeit von 20% augeschalten wird. Bei 1 wären alle ausgeschalten
 lr: 0.0001 # brauchen wir # 0.001
 wd: [0.00005] # 0.00005 # Reguliert Gewichte reduziert Overfitting verändert VerlsustfunktionJed größer desteo stärker der Einfluss
 lr_anne: 'repeat' # brauchen wir # repeat
 
-batch_size: 4 #16 # brauchen wir
-ep_train: 22 #24 # brauchen wir
+batch_size: 90 #16 # brauchen wir
+ep_train: 24 #24 # brauchen wir
 #bootstrap: 0.3
-concentrate: -20 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
-inside: 5000 # 50,250
+concentrate: -60 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
+inside: 500 # 50,250
 sigma_kp: [1.0, 2.5] # brauchen wir sigma_kp: [1.0, 2.5]
 #a_dist: -200
 
@@ -40,8 +40,8 @@ std: 0.26 # brauchen wir std: 0.26
 # bg: 1
 
 gpu: True
-dir_base: 'result/mini_testdatensatz2_3' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
-dir_dataset: 'dataset/mini_testdatensatz2' # Ordner in welchem die traingsbilder und testbilder liegen
+dir_base: 'result/dataset_large_2023_5_9_cleared_4' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
+dir_dataset: 'dataset/dataset_large_2023_5_9_cleared' # Ordner in welchem die traingsbilder und testbilder liegen
 
 # für Bildgröße 192x192: concentrate: -60, inside: 250, lr: 0.0001
 # für Bildgröße 384x384: concentrate: ..., inside: ...
