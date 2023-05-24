@@ -40,8 +40,8 @@ std: 0.26 # brauchen wir std: 0.26
 # bg: 1
 
 gpu: True
-dir_base: 'result/dataset_large_2023_5_9_cleared_4' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
-dir_dataset: 'dataset/dataset_large_2023_5_9_cleared' # Ordner in welchem die traingsbilder und testbilder liegen
+dir_base: 'result/dataset_pixel_validation' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch #result/dataset_large_2023_5_9_cleared_4
+dir_dataset: 'dataset/dataset_pixel_validation' # Ordner in welchem die traingsbilder und testbilder liegen #dataset/dataset_large_2023_5_9_cleared
 
 # für Bildgröße 192x192: concentrate: -60, inside: 250, lr: 0.0001
 # für Bildgröße 384x384: concentrate: ..., inside: ...
