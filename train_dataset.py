@@ -4,6 +4,8 @@ from PIL import Image, ImageOps
 import torch
 import torch.utils.data as _data
 import torchvision.transforms.functional as F
+from PIL import ImageEnhance
+import os
 # import matplotlib.pyplot as plt
 # from skimage import data, io, img_as_ubyte
 # from skimage.filters import threshold_multiotsu
@@ -20,6 +22,9 @@ class DataServoStereo(_data.Dataset):
         self.im_size = arg.im_size[0]
         self.mean = arg.mean
         self.std = arg.std
+        self.brightness = arg.brightness
+        self.brightness_true = arg.brightness_true
+        #self.saturation = arg.saturation
         self.data_path = path.join(arg.dir_dataset, 'train' if train else 'test')
         self.ims = sorted(listdir(self.data_path))
         self.grey = grey
@@ -45,9 +50,9 @@ class DataServoStereo(_data.Dataset):
 
         if self.train:
         # loads only one image at a time
-            img,plug_mask_tensor,plug_mask = self.img_processing(path.join(self.data_path,self.ims[index]))
+            img,plug_mask_tensor,plug_mask = self.img_processing(path.join(self.data_path,self.ims[index]), self.brightness, self.brightness_true)
         else:
-            img = self.img_processing(path.join(self.data_path,self.ims[index]))
+            img = self.img_processing(path.join(self.data_path,self.ims[index], self.brightness, self.brightness_true))
 
         if self.train:
             return img,plug_mask_tensor,plug_mask
@@ -56,10 +61,47 @@ class DataServoStereo(_data.Dataset):
         
         
 
-    def img_processing(self,data_path):
+    def img_processing(self,data_path, brightness, brightness_true):
         
         img = Image.open(data_path)
+
+        
+        
+        
+        
+        if brightness_true == True:
+            min_brightness = brightness[0]
+            max_brightness = brightness[1]
+
+        # Wähle einen zufälligen Helligkeitswert innerhalb der Range
+            brightness = np.random.uniform(min_brightness, max_brightness)
+
+            enhancer = ImageEnhance.Brightness(img)
+            img = enhancer.enhance(brightness)
+            
+
+
+        #safe picture after brigheess adjustment to check the output
+            # # Ordner für die gespeicherten Bilder erstellen, wenn er noch nicht existiert
+            # save_folder = "dataset/brightness_pictures"
+            # os.makedirs(save_folder, exist_ok=True)
+
+            # # Zähler für den Dateinamen
+            # counter = len(os.listdir(save_folder)) + 1
+
+            # # Bild speichern
+            # save_path = os.path.join(save_folder, f"processed_image_{counter}.jpg")
+            # img.save(save_path)
+            # print("Image saved to", save_path)
+            
+
+
+
+
         img = self.img_patch(img)
+
+  
+
         # If the parameter "grey" is true, convert the image to grayscale
         if self.grey:
             img = img.convert('L')
