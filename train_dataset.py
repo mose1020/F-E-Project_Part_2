@@ -52,7 +52,7 @@ class DataServoStereo(_data.Dataset):
         # loads only one image at a time
             img,plug_mask_tensor,plug_mask = self.img_processing(path.join(self.data_path,self.ims[index]), self.brightness, self.brightness_true)
         else:
-            img = self.img_processing(path.join(self.data_path,self.ims[index], self.brightness, self.brightness_true))
+            img = self.img_processing(path.join(self.data_path,self.ims[index]), self.brightness, self.brightness_true)
 
         if self.train:
             return img,plug_mask_tensor,plug_mask
@@ -65,43 +65,37 @@ class DataServoStereo(_data.Dataset):
         
         img = Image.open(data_path)
 
-        
-        
-        
-        
-        if brightness_true == True:
-            min_brightness = brightness[0]
-            max_brightness = brightness[1]
+        if self.train:
 
-        # Wähle einen zufälligen Helligkeitswert innerhalb der Range
-            brightness = np.random.uniform(min_brightness, max_brightness)
+            if brightness_true == True:
+                min_brightness = brightness[0]
+                max_brightness = brightness[1]
 
-            enhancer = ImageEnhance.Brightness(img)
-            img = enhancer.enhance(brightness)
+            # Wähle einen zufälligen Helligkeitswert innerhalb der Range
+                brightness = np.random.uniform(min_brightness, max_brightness)
+
+                enhancer = ImageEnhance.Brightness(img)
+                img = enhancer.enhance(brightness)
             
 
 
-        #safe picture after brigheess adjustment to check the output
-            # # Ordner für die gespeicherten Bilder erstellen, wenn er noch nicht existiert
-            # save_folder = "dataset/brightness_pictures"
-            # os.makedirs(save_folder, exist_ok=True)
+            #safe picture after brigheess adjustment to check the output
+                # # Ordner für die gespeicherten Bilder erstellen, wenn er noch nicht existiert
+                # save_folder = "dataset/brightness_pictures"
+                # os.makedirs(save_folder, exist_ok=True)
 
-            # # Zähler für den Dateinamen
-            # counter = len(os.listdir(save_folder)) + 1
+                # # Zähler für den Dateinamen
+                # counter = len(os.listdir(save_folder)) + 1
 
-            # # Bild speichern
-            # save_path = os.path.join(save_folder, f"processed_image_{counter}.jpg")
-            # img.save(save_path)
-            # print("Image saved to", save_path)
+                # # Bild speichern
+                # save_path = os.path.join(save_folder, f"processed_image_{counter}.jpg")
+                # img.save(save_path)
+                # print("Image saved to", save_path)
             
-
-
-
 
         img = self.img_patch(img)
 
   
-
         # If the parameter "grey" is true, convert the image to grayscale
         if self.grey:
             img = img.convert('L')
