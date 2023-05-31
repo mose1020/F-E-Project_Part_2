@@ -17,7 +17,7 @@ ep_train: 24 #24 # brauchen wir
 #bootstrap: 0.3
 concentrate: -120 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
 inside: 600 # 50,250
-sigma_kp: [1.0, 2.5] # brauchen wir sigma_kp: [1.0, 2.5]
+sigma_kp: [2.0, 2.5] # brauchen wir sigma_kp: [1.0, 2.5]
 #a_dist: -200
 
 obj_class: [0, 1] # orginal: [0,1,2]
@@ -41,8 +41,8 @@ brightness_true: True
 # bg: 1
 
 gpu: True
-dir_base: 'result/dataset_pixel_validation' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
-dir_dataset: 'dataset/dataset_pixel_validation' # Ordner in welchem die traingsbilder und testbilder liegen
+dir_base: 'result/dataset_large_2023_5_9_cleared_5' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
+dir_dataset: 'dataset/dataset_large_2023_5_9_cleared' # Ordner in welchem die traingsbilder und testbilder liegen
 
 # für Bildgröße 192x192: concentrate: -60, inside: 250, lr: 0.0001
 # für Bildgröße 384x384: concentrate: ..., inside: ...
