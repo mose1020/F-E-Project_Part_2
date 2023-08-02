@@ -29,11 +29,20 @@ The IBVS controller is programmed in the class VisualServoingController.
 # Step 4: Validation
 During the Regulation we save parameters in a csv file. You can find the csv file: "scripts/kovis_moduls/keypoints_servoing.csv" The csv file contains the following parameters:
 
+* **iteration_number**: The number of the iteration.
+* **delta_loop**: The time between two iterations
+* **delta_interference**: The time between two iterations #TODO: What is the difference between delta_loop and delta_interference?
+* **delta_extract_featurepoints**: The time to extract the feature points.
+* **delta_camera**: The time to get the image from the camera.
+* **dp**: Twist / Velocities from the IBVS controller.
 
+keypoints,iteration_number,delta_loop,delta_interference,
 
 Now run the validation script: **kovis_validation.py**
 
 # Start the Programm
+
+The Twist from The IBVS controller is clipped for saftey reasons.
         
     rosrun iaps_ur5e_sim kovis_ibvs.py  
 
