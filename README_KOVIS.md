@@ -47,7 +47,8 @@ The Twist from The IBVS controller is clipped for saftey reasons.
     rosrun iaps_ur5e_sim kovis_ibvs.py  
 
 
-
+z = 100 höhe
+Speed = 100%
 
 
 

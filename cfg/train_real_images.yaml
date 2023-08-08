@@ -1,8 +1,8 @@
 task: 'full' # brauchen wird
-im_size: [[384,384], [192, 192]] # brauchen wir
+im_size: [[720,720], [360, 360]] # brauchen wir
 num_input: 1 # brauchen wir # normal: 1 --> gibt an, wie viele Bildkanäle geladen werden --> 1: Graubild, 3: RGB-Bild
 #num_output: [1, 3] 
-num_keypoint: 64 # brauchen wir normal 10
+num_keypoint: 32 # brauchen wir normal 10
 growth_rate: [24, 24, 64] # brauchen wir # [24, 24, 64]
 blk_cfg_enc: [[2, 3, 4], [4, 3, 2]] # brauchen wir # [[2, 3, 4], [4, 3, 2]]
 #blk_cfg_dec: [4, 3]
@@ -12,12 +12,12 @@ lr: 0.0001 # brauchen wir # 0.001
 wd: [0.00005] # 0.00005 # Reguliert Gewichte reduziert Overfitting verändert VerlsustfunktionJed größer desteo stärker der Einfluss
 lr_anne: 'repeat' # brauchen wir # repeat
 
-batch_size: 20 #16 # brauchen wir
-ep_train: 24 #24 # brauchen wir
+batch_size: 6 #16 # brauchen wir
+ep_train: 5 #24 # brauchen wir
 #bootstrap: 0.3
 concentrate: -120 # brauchen wir ums höher umso schneller wird LossC zu 0  # alter Wert -20
 inside: 600 # 50,250
-sigma_kp: [2.0, 2.5] # brauchen wir sigma_kp: [1.0, 2.5]
+sigma_kp: [1.0, 2.5] # brauchen wir sigma_kp: [1.0, 2.5]
 #a_dist: -200
 
 obj_class: [0, 1] # orginal: [0,1,2]
@@ -41,7 +41,7 @@ brightness_true: True
 # bg: 1
 
 gpu: True
-dir_base: 'result/dataset_large_2023_5_9_cleared_5' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
+dir_base: 'result/dataset_large_2023_5_9_cleared_v7_720' # Ordner, in welchem die results gespeichert werden --> Ändern ist unpraktisch
 dir_dataset: 'dataset/dataset_large_2023_5_9_cleared' # Ordner in welchem die traingsbilder und testbilder liegen
 
 # für Bildgröße 192x192: concentrate: -60, inside: 250, lr: 0.0001
