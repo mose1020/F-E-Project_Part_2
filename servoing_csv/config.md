@@ -12,7 +12,7 @@
                     kIBVS = 0.0001
                 lin_index = 0
 
-        if dp_mean_x_y < 5*10**(-7) or counter >3000: # 1*10**(-4)
+        if dp_mean_x_y < 5*10**(-7) or counter >1500: # 1*10**(-4)
  
 # 2 config Keypoints select3ed and anderes Abruchkriterium
 
@@ -28,4 +28,4 @@
                     kIBVS = 0.0001
                 lin_index = 0
 
-        if dp_mean_x_y < 2*10**(-6) or counter >3000: # 1*10**(-4)
+        if dp_mean_x_y < 2*10**(-6) or counter >1500: # 1*10**(-4)
