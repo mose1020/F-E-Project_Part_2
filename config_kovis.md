@@ -192,4 +192,14 @@ config 3 8 August
     Anzahl der lineare abhängigen Iterationen:  127
 
 
-    
+        myTwist = ap_moveTwistActionGoal()
+        myTwist.goal.twist.linear.x = np.clip(-dp[0],-1*10**(-3),1*10**(-3)) #Attention minus because of IBVS controller  numpy.clip(a, a_min, a_max
+        # changed to minus Sven 341 Juli 
+        #print("dp[0]", dp[0])
+        myTwist.goal.twist.linear.y = np.clip(dp[1],-1*10**(-3),1*10**(-3))  #Attention minus because of IBVS controller
+        # changed to positiv Sven 31 Juli
+        #print("dp[1]", dp[1])
+        # myTwist.goal.twist.linear.z = np.clip(-dp[2],-1*10**(-3),1*10**(-3))  #Attention minus because of IBVS controller #0.0 # dp[2]
+        # myTwist.goal.twist.angular.x = np.clip(-dp[3],-1*10**(-3),1*10**(-3))  #Attention minus because of IBVS controller #0.0 # dp[3]
+        # myTwist.goal.twist.angular.y = np.clip(-dp[4],-1*10**(-3),1*10**(-3))  #Attention minus because of IBVS controller#0.0 # dp[4]
+        myTwist.goal.twist.angular.z = np.clip(-dp[5]*100,-5*10**(-3),5*10**(-3)) #Attention minus because of IBVS controller
